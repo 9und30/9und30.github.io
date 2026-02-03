@@ -1,458 +1,480 @@
-  <!DOCTYPE html>
-  <html lang="de" class="scroll-smooth">
-  <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>39 - Superflüster</title>
-      <meta name="description" content="Verwandle deine Stimme in Text. Lokal, schnell und effizient mit Whisper AI." />
-      <link rel="icon" type="image/x-icon" href="superfluester.ico">
-      <script src="https://cdn.tailwindcss.com"></script>
-      <script src="https://unpkg.com/lucide@latest"></script>
-      <script>
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>39 - Superflüster</title>
+    <meta name="description" content="Verwandle deine Stimme in Text. Lokal, schnell und effizient mit Whisper AI." />
+    <link rel="icon" type="image/x-icon" href="superfluester.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
         tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                brand: {
-                  dark: '#0f172a',
-                  primary: '#3b82f6',
-                  accent: '#6366f1',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            primary: '#3b82f6',
+                            accent: '#6366f1',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
                 }
-              },
-              fontFamily: {
-                sans: ['Inter', 'system-ui', 'sans-serif'],
-              },
-              animation: {
-                'fade-in': 'fadeIn 1s ease-out',
-                'slide-up': 'slideUp 0.8s ease-out',
-              },
-              keyframes: {
-                fadeIn: {
-                  '0%': { opacity: '0' },
-                  '100%': { opacity: '1' },
-                },
-                slideUp: {
-                  '0%': { opacity: '0', transform: 'translateY(20px)' },
-                  '100%': { opacity: '1', transform: 'translateY(0)' },
-                }
-              }
             }
-          }
         }
-      </script>
-      <style>
+    </script>
+    <style>
         body {
-          background-color: #020617; /* slate-950 */
-          color: #ffffff;
+            background-color: #020617;
+            /* slate-950 */
+            color: #ffffff;
         }
+
         /* Custom scrollbar for code blocks */
         ::-webkit-scrollbar {
-          width: 8px;
-          height: 8px;
+            width: 8px;
+            height: 8px;
         }
+
         ::-webkit-scrollbar-track {
-          background: #1e293b;
+            background: #1e293b;
         }
+
         ::-webkit-scrollbar-thumb {
-          background: #475569;
-          border-radius: 4px;
+            background: #475569;
+            border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
-          background: #64748b;
+            background: #64748b;
         }
-      </style>
-  </head>
-  <body class="min-h-screen bg-slate-950 text-slate-50 selection:bg-indigo-500 selection:text-white overflow-x-hidden">
+    </style>
+</head>
 
-      <!-- Background Gradient Mesh -->
-      <div class="fixed inset-0 z-0 pointer-events-none">
-          <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-900/20 rounded-full blur-[120px]"></div>
-          <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-900/10 rounded-full
+<body class="min-h-screen bg-slate-950 text-slate-50 selection:bg-indigo-500 selection:text-white overflow-x-hidden">
+
+    <!-- Background Gradient Mesh -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-900/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-900/10 rounded-full
   blur-[120px]"></div>
-      </div>
+    </div>
 
-      <div class="relative z-10">
+    <div class="relative z-10">
 
-          <!-- Hero Section -->
-          <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-20">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-20">
 
-              <!-- Top Badge -->
-              <div class="animate-fade-in mb-8 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50
+            <!-- Navbar / Logo Header -->
+            <!-- Navbar / Logo Header -->
+            <nav class="relative w-full p-6 md:p-10 flex justify-center z-50 mb-10">
+                <div
+                    class="animate-fade-in flex items-center gap-3 md:gap-5 px-5 md:px-8 py-4 rounded-2xl bg-slate-900/30 border border-white/5 backdrop-blur-md shadow-xl transition-all hover:bg-slate-900/60 hover:border-indigo-500/30 cursor-default group max-w-[95vw]">
+                    <div class="relative flex items-center justify-center shrink-0">
+                        <div
+                            class="absolute inset-0 bg-indigo-500 blur-md opacity-20 group-hover:opacity-40 transition-opacity">
+                        </div>
+                        <img src="superfluester.png" alt="Superflüster"
+                            class="relative w-8 h-8 md:w-10 md:h-10 object-contain shrink-0" />
+                    </div>
+                    <span
+                        class="font-bold text-xl md:text-2xl text-slate-200 tracking-tight group-hover:text-white transition-colors truncate">SuperFlüster</span>
+
+                    <!-- Integrated Audio Wave -->
+                    <!-- Integrated Audio Wave -->
+                    <div
+                        class="flex gap-1 md:gap-1.5 h-6 items-center ml-2 md:ml-3 border-l border-white/10 pl-3 md:pl-5 shrink-0">
+                        <span class="w-1 md:w-1.5 h-3 bg-indigo-500 rounded-full animate-[bounce_1s_infinite]"></span>
+                        <span class="w-1 md:w-1.5 h-6 bg-indigo-400 rounded-full animate-[bounce_1.2s_infinite]"></span>
+                        <span class="w-1 md:w-1.5 h-4 bg-indigo-500 rounded-full animate-[bounce_0.8s_infinite]"></span>
+                        <span class="w-1 md:w-1.5 h-7 bg-indigo-400 rounded-full animate-[bounce_1.1s_infinite]"></span>
+                        <span class="w-1 md:w-1.5 h-3 bg-indigo-500 rounded-full animate-[bounce_0.9s_infinite]"></span>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Top Badge -->
+            <div class="animate-fade-in mb-8 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50
   border border-slate-700/50 backdrop-blur-sm">
-                  <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400
   opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                  </span>
-                  <span class="text-xs font-medium text-slate-300 uppercase tracking-wider">Windows exklusiv</span>
-              </div>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span class="text-xs font-medium text-slate-300 uppercase tracking-wider">Windows exklusiv</span>
+            </div>
 
-              <!-- Main Headline -->
-              <h1 class="animate-slide-up max-w-4xl text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text
+            <!-- Main Headline -->
+            <h1 class="animate-slide-up max-w-4xl text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text
   text-transparent bg-gradient-to-b from-white to-slate-400">
-                  Einfach sprechen.<br />
-                  Schneller schreiben.
-              </h1>
+                Einfach sprechen.<br />
+                Schneller schreiben.
+            </h1>
 
-              <!-- Subheadline -->
-              <p class="animate-slide-up delay-100 max-w-2xl text-lg md:text-xl text-slate-400 mb-10 leading-relaxed">
-                  Verwandle deine Stimme in perfekt formatierten Text. <br class="hidden md:block" /> Funktioniert in
-  jeder Windows-App, lokal und datenschutzkonform.
-              </p>
+            <!-- Subheadline -->
+            <p class="animate-slide-up delay-100 max-w-2xl text-lg md:text-xl text-slate-400 mb-10 leading-relaxed">
+                Verwandle deine Stimme in perfekt formatierten Text. <br class="hidden md:block" /> Funktioniert in
+                jeder Windows-App, lokal und datenschutzkonform.
+            </p>
 
-              <!-- CTA Buttons -->
-              <div class="animate-slide-up delay-200 flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center
+            <!-- CTA Buttons -->
+            <div class="animate-slide-up delay-200 flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center
   items-center">
-                  <a
-                      href="https://drive.proton.me/urls/VKDWEGF9MR#O8gtgPjN0Bor"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white
+                <a href="https://drive.proton.me/urls/VKDWEGF9MR#O8gtgPjN0Bor" target="_blank" rel="noopener noreferrer"
+                    class="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-white
   text-slate-950 px-8 py-4 rounded-xl font-semibold transition-all hover:bg-slate-200 hover:scale-105 active:scale-95
-  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-900"
-                  >
-                      <i data-lucide="monitor" class="w-5 h-5"></i>
-                      <span>Download für Windows</span>
-                      <div class="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/10"></div>
-                  </a>
-              </div>
+  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-900">
+                    <i data-lucide="monitor" class="w-5 h-5"></i>
+                    <span>Download für Windows</span>
+                    <div class="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/10"></div>
+                </a>
+            </div>
 
-              <p class="animate-slide-up delay-300 mt-6 text-sm text-slate-500 flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-slate-700"></span>
-                  Kostenlos
-                  <span class="w-2 h-2 rounded-full bg-slate-700"></span>
-                  Benötigt Windows 10/11
-              </p>
+            <p class="animate-slide-up delay-300 mt-6 text-sm text-slate-500 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-slate-700"></span>
+                Kostenlos
+                <span class="w-2 h-2 rounded-full bg-slate-700"></span>
+                Benötigt Windows 10/11
+            </p>
 
-              <!-- Visual Abstract / superfluester Showcase -->
-              <div class="animate-slide-up delay-500 mt-20 relative w-full max-w-3xl aspect-[16/9] bg-gradient-to-tr
-  from-slate-900 to-slate-800 rounded-xl border border-slate-700/50 shadow-2xl overflow-hidden flex items-center
-  justify-center group">
-                   <div class="absolute inset-0
-  bg-[url('https://images.unsplash.com/photo-1614726365349-436f56e9c91d?q=80&w=2800&auto=format&fit=crop')] bg-cover
-  bg-center opacity-10 group-hover:opacity-20 transition-opacity duration-700"></div>
 
-                   <div class="relative z-10 flex flex-col items-center justify-center p-8">
-                      <div class="relative">
-                          <!-- Glow Effect behind superfluester -->
-                          <div class="absolute inset-0 bg-indigo-500 blur-[80px] opacity-20 rounded-full
-  animate-pulse"></div>
 
-                          <!-- superfluester Image -->
-                          <img
-                              src="superfluester.png"
-                              alt="Superflüster superfluester"
-                              class="relative w-48 h-48 md:w-64 md:h-64 object-contain mix-blend-mode-screen
-  drop-shadow-2xl opacity-90 transition-transform duration-700 group-hover:scale-105"
-                          />
-                      </div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14" />
+                    <path d="m19
+  12-7 7-7-7" />
+                </svg>
+            </div>
+        </section>
 
-                      <!-- Audio Wave Visual -->
-                      <div class="mt-8 flex items-center gap-3 px-6 py-3 bg-slate-950/40 backdrop-blur-md border
-  border-slate-800/50 rounded-full shadow-xl">
-                          <div class="flex gap-1 h-4 items-center">
-                              <span class="w-1 h-2 bg-indigo-500 rounded-full animate-[bounce_1s_infinite]"></span>
-                              <span class="w-1 h-4 bg-indigo-400 rounded-full animate-[bounce_1.2s_infinite]"></span>
-                              <span class="w-1 h-3 bg-indigo-500 rounded-full animate-[bounce_0.8s_infinite]"></span>
-                              <span class="w-1 h-5 bg-indigo-400 rounded-full animate-[bounce_1.1s_infinite]"></span>
-                              <span class="w-1 h-2 bg-indigo-500 rounded-full animate-[bounce_0.9s_infinite]"></span>
-                          </div>
-                          <span class="text-slate-300 font-mono text-sm tracking-wide">Bereit zur Aufnahme</span>
-                      </div>
-                   </div>
-              </div>
+        <!-- Features Section -->
+        <section class="py-24 px-4 bg-slate-950/50">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Volle Kontrolle mit deiner Tastatur</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto">
+                        Superflüster wurde für maximale Effizienz entwickelt. Steuere alles mit einfachen Shortcuts,
+                        ohne jemals die Maus anfassen zu müssen.
+                    </p>
+                </div>
 
-              <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-slate-600">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19
-  12-7 7-7-7"/></svg>
-              </div>
-          </section>
-
-          <!-- Features Section -->
-          <section class="py-24 px-4 bg-slate-950/50">
-              <div class="max-w-6xl mx-auto">
-                  <div class="text-center mb-16">
-                      <h2 class="text-3xl md:text-4xl font-bold mb-4">Volle Kontrolle mit deiner Tastatur</h2>
-                      <p class="text-slate-400 max-w-2xl mx-auto">
-                          Superflüster wurde für maximale Effizienz entwickelt. Steuere alles mit einfachen Shortcuts,
-  ohne jemals die Maus anfassen zu müssen.
-                      </p>
-                  </div>
-
-                  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                      <!-- Feature 1: Start/Standard -->
-                      <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-indigo-500/30
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Feature 1: Start/Standard -->
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-indigo-500/30
   transition-colors">
-                          <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-6">
-                              <i data-lucide="zap" class="w-6 h-6 text-indigo-400"></i>
-                          </div>
-                          <h3 class="text-xl font-semibold mb-3">Aufnahme & Einfügen</h3>
-                          <p class="text-slate-400 mb-6 text-sm leading-relaxed">
-                              Starte die Aufnahme und beende sie, um den Text direkt an der Cursor-Position einzufügen.
-                          </p>
-                          <div class="bg-slate-950 rounded-lg p-4 border border-slate-800">
-                              <div class="flex justify-between items-center mb-2">
-                                  <span class="text-xs text-slate-500 uppercase font-semibold">Starten</span>
-                                  <div class="flex gap-1">
-                                      <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
+                        <div class="w-12 h-12 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="zap" class="w-6 h-6 text-indigo-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Aufnahme & Einfügen</h3>
+                        <p class="text-slate-400 mb-6 text-sm leading-relaxed">
+                            Starte die Aufnahme und beende sie, um den Text direkt an der Cursor-Position einzufügen.
+                        </p>
+                        <div class="bg-slate-950 rounded-lg p-4 border border-slate-800">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs text-slate-500 uppercase font-semibold">Starten</span>
+                                <div class="flex gap-1">
+                                    <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
   text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center
   shadow-sm">Strg</kbd>
-                                      <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
+                                    <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
   text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center
   shadow-sm">Win</kbd>
-                                  </div>
-                              </div>
-                              <div class="flex justify-between items-center">
-                                  <span class="text-xs text-slate-500 uppercase font-semibold">Beenden (Einfügen)</span>
-                                  <div class="flex gap-1">
-                                      <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-slate-500 uppercase font-semibold">Beenden (Einfügen)</span>
+                                <div class="flex gap-1">
+                                    <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
   text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center
   shadow-sm">Strg</kbd>
-                                      <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
+                                    <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
   text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center
   shadow-sm">Win</kbd>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                      <!-- Feature 2: Clipboard Only -->
-                      <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-pink-500/30
+                    <!-- Feature 2: Clipboard Only -->
+                    <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-pink-500/30
   transition-colors">
-                          <div class="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center mb-6">
-                              <i data-lucide="clipboard" class="w-6 h-6 text-pink-400"></i>
-                          </div>
-                          <h3 class="text-xl font-semibold mb-3">Nur Kopieren</h3>
-                          <p class="text-slate-400 mb-6 text-sm leading-relaxed">
-                              Willst du den Text erst prüfen? Beende die Aufnahme nur mit Strg, um den Text in die
-  Zwischenablage zu legen.
-                          </p>
-                          <div class="bg-slate-950 rounded-lg p-4 border border-slate-800">
-                               <div class="flex justify-between items-center mb-2">
-                                  <span class="text-xs text-slate-500 uppercase font-semibold">Starten</span>
-                                  <div class="flex gap-1">
-                                      <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
+                        <div class="w-12 h-12 bg-pink-500/10 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="clipboard" class="w-6 h-6 text-pink-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Nur Kopieren</h3>
+                        <p class="text-slate-400 mb-6 text-sm leading-relaxed">
+                            Willst du den Text erst prüfen? Beende die Aufnahme nur mit Strg, um den Text in die
+                            Zwischenablage zu legen.
+                        </p>
+                        <div class="bg-slate-950 rounded-lg p-4 border border-slate-800">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs text-slate-500 uppercase font-semibold">Starten</span>
+                                <div class="flex gap-1">
+                                    <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
   text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center
   shadow-sm">Strg</kbd>
-                                      <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
+                                    <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
   text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center
   shadow-sm">Win</kbd>
-                                  </div>
-                              </div>
-                              <div class="flex justify-between items-center">
-                                  <span class="text-xs text-slate-500 uppercase font-semibold">Beenden (Kopieren)</span>
-                                  <div class="flex gap-1">
-                                      <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-slate-500 uppercase font-semibold">Beenden (Kopieren)</span>
+                                <div class="flex gap-1">
+                                    <kbd class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold
   text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center
   shadow-sm">Strg</kbd>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                      <!-- Feature 3: Configurable -->
-                      <div class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-emerald-500/30
-  transition-colors">
-                          <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6">
-                              <i data-lucide="settings" class="w-6 h-6 text-emerald-400"></i>
-                          </div>
-                          <h3 class="text-xl font-semibold mb-3">Anpassbarer Workflow</h3>
-                          <p class="text-slate-400 mb-6 text-sm leading-relaxed">
-                              Entscheide in den Einstellungen, ob nach dem Einfügen automatisch <span class="font-mono
-  text-emerald-400">Enter</span> gedrückt werden soll, um Nachrichten sofort abzuschicken.
-                          </p>
-                           <div class="bg-slate-950 rounded-lg p-4 border border-slate-800 flex items-center gap-3">
-                              <div class="h-4 w-4 rounded border border-slate-600 bg-emerald-500/20 flex items-center
-  justify-center">
-                                  <div class="h-2 w-2 bg-emerald-500 rounded-sm"></div>
-                              </div>
-                              <span class="text-sm text-slate-300">Enter nach Einfügen drücken</span>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section>
+                    <!-- Feature 3: KI-Paraphrasierung -->
+                    <div
+                        class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-amber-500/30 transition-colors">
+                        <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="sparkles" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">KI-Paraphrasierung</h3>
+                        <p class="text-slate-400 mb-6 text-sm leading-relaxed">
+                            Hinterlege optional deinen Google Gemini Key. Nutze <strong>Win + Alt</strong>, um Aufnahmen
+                            automatisch zu verbessern.
+                        </p>
+                        <div class="bg-slate-950 rounded-lg p-4 border border-slate-800">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs text-slate-500 uppercase font-semibold">KI-Aufnahme</span>
+                                <div class="flex gap-1">
+                                    <kbd
+                                        class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center shadow-sm">Win</kbd>
+                                    <kbd
+                                        class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center shadow-sm">Alt</kbd>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-          <!-- CudaGuide Section -->
-          <section class="py-24 px-4 border-t border-slate-800/50">
-              <div class="max-w-4xl mx-auto">
-                  <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-                      <div>
-                          <h2 class="text-3xl font-bold mb-2 flex items-center gap-3">
-                              <i data-lucide="cpu" class="w-8 h-8 text-indigo-400"></i>
-                              GPU Beschleunigung
-                          </h2>
-                          <p class="text-slate-400">
-                              Superflüster nutzt standardmäßig die CPU. Mit einer NVIDIA Karte kannst du die
-  Transkription massiv beschleunigen.
-                          </p>
-                      </div>
-                      <button
-                          id="cuda-toggle-btn"
-                          class="flex items-center gap-2 px-6 py-3 bg-slate-900 border border-slate-700 rounded-lg
-  hover:bg-slate-800 transition-colors text-sm font-medium"
-                      >
-                          <span id="cuda-btn-text">Installationsanleitung anzeigen</span>
-                          <i id="cuda-btn-icon" data-lucide="chevron-down" class="w-4 h-4"></i>
-                      </button>
-                  </div>
+                    <!-- Feature 4: Volle Kontrolle -->
+                    <div
+                        class="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 hover:border-emerald-500/30 transition-colors">
+                        <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-6">
+                            <i data-lucide="sliders" class="w-6 h-6 text-emerald-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Volle Kontrolle & Settings</h3>
+                        <p class="text-slate-400 mb-6 text-sm leading-relaxed">
+                            Pausiere mit <strong>Alt</strong>, brich ab mit <strong>Esc</strong>. Konfiguriere
+                            Auto-Enter und mehr direkt in den Einstellungen.
+                        </p>
+                        <div class="bg-slate-950 rounded-lg p-4 border border-slate-800 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-slate-500 uppercase font-semibold">Pausieren</span>
+                                <kbd
+                                    class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center shadow-sm">Alt</kbd>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-slate-500 uppercase font-semibold">Abbrechen</span>
+                                <kbd
+                                    class="min-w-[2rem] px-1.5 py-0.5 text-xs font-mono font-semibold text-slate-300 bg-slate-800 border border-slate-600 border-b-2 rounded-md flex items-center justify-center shadow-sm">Esc</kbd>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                  <!-- Hidden Content -->
-                  <div id="cuda-content" class="hidden animate-fade-in space-y-8 bg-slate-900/30 p-8 rounded-2xl border
+        <!-- CudaGuide Section -->
+        <section class="py-24 px-4 border-t border-slate-800/50">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2 flex items-center gap-3">
+                            <i data-lucide="cpu" class="w-8 h-8 text-indigo-400"></i>
+                            GPU Beschleunigung
+                        </h2>
+                        <p class="text-slate-400">
+                            Superflüster nutzt standardmäßig die CPU. Mit einer NVIDIA Karte kannst du die
+                            Transkription massiv beschleunigen.
+                        </p>
+                    </div>
+                    <button id="cuda-toggle-btn" class="flex items-center gap-2 px-6 py-3 bg-slate-900 border border-slate-700 rounded-lg
+  hover:bg-slate-800 transition-colors text-sm font-medium">
+                        <span id="cuda-btn-text">Installationsanleitung anzeigen</span>
+                        <i id="cuda-btn-icon" data-lucide="chevron-down" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- Hidden Content -->
+                <div id="cuda-content" class="hidden animate-fade-in space-y-8 bg-slate-900/30 p-8 rounded-2xl border
   border-slate-800">
 
-                      <div class="bg-indigo-900/20 border border-indigo-500/20 p-4 rounded-lg flex items-start gap-3">
-                          <i data-lucide="alert-circle" class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5"></i>
-                          <div class="text-sm text-indigo-200">
-                              <strong>Hinweis:</strong> Superflüster wechselt automatisch zur CPU, wenn keine
-  CUDA-Treiber gefunden werden. Diese Schritte sind optional.
-                          </div>
-                      </div>
+                    <div class="bg-indigo-900/20 border border-indigo-500/20 p-4 rounded-lg flex items-start gap-3">
+                        <i data-lucide="alert-circle" class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5"></i>
+                        <div class="text-sm text-indigo-200">
+                            <strong>Hinweis:</strong> Superflüster wechselt automatisch zur CPU, wenn keine
+                            CUDA-Treiber gefunden werden. Diese Schritte sind optional.
+                        </div>
+                    </div>
 
-                      <div class="space-y-6">
-                          <!-- Step 1 -->
-                          <div class="border-l-2 border-slate-700 pl-6 relative">
-                              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
+                    <div class="space-y-6">
+                        <!-- Step 1 -->
+                        <div class="border-l-2 border-slate-700 pl-6 relative">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
   border-slate-600"></div>
-                              <h3 class="text-lg font-semibold text-white mb-3">1. CUDA Toolkit 12.x installieren</h3>
-                              <div class="text-slate-300">
-                                  <p class="text-slate-400 mb-2">Lade das Toolkit von der offiziellen NVIDIA Seite
-  herunter:</p>
-                                  <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener
+                            <h3 class="text-lg font-semibold text-white mb-3">1. CUDA Toolkit 12.x installieren</h3>
+                            <div class="text-slate-300">
+                                <p class="text-slate-400 mb-2">Lade das Toolkit von der offiziellen NVIDIA Seite
+                                    herunter:</p>
+                                <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="noopener
   noreferrer" class="text-indigo-400 hover:text-indigo-300 underline mb-2 block">
-                                      NVIDIA CUDA Toolkit Download
-                                  </a>
-                                  <ul class="list-disc list-inside text-slate-400 text-sm pl-2">
-                                      <li>Wähle: Windows → x86_64 → Deine Version → exe (local)</li>
-                                      <li>Installiere mit Standard-Einstellungen</li>
-                                  </ul>
-                              </div>
-                          </div>
+                                    NVIDIA CUDA Toolkit Download
+                                </a>
+                                <ul class="list-disc list-inside text-slate-400 text-sm pl-2">
+                                    <li>Wähle: Windows → x86_64 → Deine Version → exe (local)</li>
+                                    <li>Installiere mit Standard-Einstellungen</li>
+                                </ul>
+                            </div>
+                        </div>
 
-                          <!-- Step 2 -->
-                          <div class="border-l-2 border-slate-700 pl-6 relative">
-                              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
+                        <!-- Step 2 -->
+                        <div class="border-l-2 border-slate-700 pl-6 relative">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
   border-slate-600"></div>
-                              <h3 class="text-lg font-semibold text-white mb-3">2. cuDNN installieren</h3>
-                              <div class="text-slate-300">
-                                  <p class="text-slate-400 mb-2">Erfordert einen NVIDIA Account:</p>
-                                  <a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener noreferrer"
-  class="text-indigo-400 hover:text-indigo-300 underline mb-2 block">
-                                      NVIDIA cuDNN Download
-                                  </a>
-                                  <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 text-sm font-mono
+                            <h3 class="text-lg font-semibold text-white mb-3">2. cuDNN installieren</h3>
+                            <div class="text-slate-300">
+                                <p class="text-slate-400 mb-2">Erfordert einen NVIDIA Account:</p>
+                                <a href="https://developer.nvidia.com/cudnn" target="_blank" rel="noopener noreferrer"
+                                    class="text-indigo-400 hover:text-indigo-300 underline mb-2 block">
+                                    NVIDIA cuDNN Download
+                                </a>
+                                <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 text-sm font-mono
   text-slate-300 overflow-x-auto">
-                                      <p class="text-slate-500 mb-2"># Inhalt des ZIP-Archivs in deinen CUDA-Ordner
-  kopieren:</p>
-                                      <p>bin/*.dll &rarr; C:\Program Files\NVIDIA GPU Computing
-  Toolkit\CUDA\v12.x\bin\</p>
-                                      <p>include/*.h &rarr; C:\Program Files\NVIDIA GPU Computing
-  Toolkit\CUDA\v12.x\include\</p>
-                                      <p>lib/x64/*.lib &rarr; C:\Program Files\NVIDIA GPU Computing
-  Toolkit\CUDA\v12.x\lib\x64\</p>
-                                  </div>
-                              </div>
-                          </div>
+                                    <p class="text-slate-500 mb-2"># Inhalt des ZIP-Archivs in deinen CUDA-Ordner
+                                        kopieren:</p>
+                                    <p>bin/*.dll &rarr; C:\Program Files\NVIDIA GPU Computing
+                                        Toolkit\CUDA\v12.x\bin\</p>
+                                    <p>include/*.h &rarr; C:\Program Files\NVIDIA GPU Computing
+                                        Toolkit\CUDA\v12.x\include\</p>
+                                    <p>lib/x64/*.lib &rarr; C:\Program Files\NVIDIA GPU Computing
+                                        Toolkit\CUDA\v12.x\lib\x64\</p>
+                                </div>
+                            </div>
+                        </div>
 
-                          <!-- Step 3 -->
-                          <div class="border-l-2 border-slate-700 pl-6 relative">
-                              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
+                        <!-- Step 3 -->
+                        <div class="border-l-2 border-slate-700 pl-6 relative">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
   border-slate-600"></div>
-                              <h3 class="text-lg font-semibold text-white mb-3">3. PyTorch mit CUDA Support
-  installieren</h3>
-                              <div class="text-slate-300">
-                                  <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 group relative">
-                                      <i data-lucide="terminal" class="absolute right-4 top-4 w-5 h-5
+                            <h3 class="text-lg font-semibold text-white mb-3">3. PyTorch mit CUDA Support
+                                installieren</h3>
+                            <div class="text-slate-300">
+                                <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 group relative">
+                                    <i data-lucide="terminal" class="absolute right-4 top-4 w-5 h-5
   text-slate-700"></i>
-                                      <code class="text-sm font-mono text-emerald-400 block">
+                                    <code class="text-sm font-mono text-emerald-400 block">
                                           pip uninstall torch
                                       </code>
-                                      <code class="text-sm font-mono text-emerald-400 block mt-2">
+                                    <code class="text-sm font-mono text-emerald-400 block mt-2">
                                           pip install torch --index-url https://download.pytorch.org/whl/cu121
                                       </code>
-                                  </div>
-                              </div>
-                          </div>
+                                </div>
+                            </div>
+                        </div>
 
-                          <!-- Step 4 -->
-                          <div class="border-l-2 border-slate-700 pl-6 relative">
-                              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
+                        <!-- Step 4 -->
+                        <div class="border-l-2 border-slate-700 pl-6 relative">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
   border-slate-600"></div>
-                              <h3 class="text-lg font-semibold text-white mb-3">4. Überprüfung</h3>
-                              <div class="text-slate-300">
-                                   <div class="bg-slate-950 p-4 rounded-lg border border-slate-800">
-                                      <code class="text-sm font-mono text-slate-300 block">
+                            <h3 class="text-lg font-semibold text-white mb-3">4. Überprüfung</h3>
+                            <div class="text-slate-300">
+                                <div class="bg-slate-950 p-4 rounded-lg border border-slate-800">
+                                    <code class="text-sm font-mono text-slate-300 block">
                                           python -c "import torch; print(torch.cuda.is_available())"
                                       </code>
-                                      <div class="mt-2 text-slate-500 text-sm"># Sollte "True" ausgeben</div>
-                                  </div>
-                              </div>
-                          </div>
+                                    <div class="mt-2 text-slate-500 text-sm"># Sollte "True" ausgeben</div>
+                                </div>
+                            </div>
+                        </div>
 
-                           <!-- Step 5 -->
-                          <div class="border-l-2 border-slate-700 pl-6 relative">
-                              <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
+                        <!-- Step 5 -->
+                        <div class="border-l-2 border-slate-700 pl-6 relative">
+                            <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-slate-800 border-2
   border-slate-600"></div>
-                              <h3 class="text-lg font-semibold text-white mb-3">5. In Superflüster aktivieren</h3>
-                              <div class="text-slate-300">
-                                  <p class="text-slate-400">
-                                      Öffne die Einstellungen über das Tray-Icon und aktiviere den Schalter <span
-  class="text-white font-semibold">"GPU verwenden"</span>.
-                                  </p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section>
+                            <h3 class="text-lg font-semibold text-white mb-3">5. In Superflüster aktivieren</h3>
+                            <div class="text-slate-300">
+                                <p class="text-slate-400">
+                                    Öffne die Einstellungen über das Tray-Icon und aktiviere den Schalter <span
+                                        class="text-white font-semibold">"GPU verwenden"</span>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-          <!-- Footer -->
-          <footer class="py-12 border-t border-slate-800 bg-slate-950">
-              <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
-                  <div class="flex items-center gap-3">
-                      <!-- superfluester with screen blend mode to remove background -->
-                      <img
-                          src="superfluester.png"
-                          alt="Superflüster superfluester"
-                          class="w-10 h-10 object-contain mix-blend-mode-screen opacity-90"
-                      />
-                      <span class="font-bold text-lg tracking-tight text-slate-200">Superflüster</span>
-                  </div>
+        <!-- Footer -->
+        <footer class="py-12 border-t border-slate-800 bg-slate-950">
+            <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <!-- superfluester with screen blend mode to remove background -->
+                    <img src="superfluester.png" alt="Superflüster superfluester"
+                        class="w-10 h-10 object-contain mix-blend-mode-screen opacity-90" />
+                    <span class="font-bold text-lg tracking-tight text-slate-200">Superflüster</span>
+                </div>
 
-                  <div class="text-slate-500 text-sm text-center md:text-right">
-                      <p>
-                          Entwickelt mit ❤️
-                      </p>
-                  </div>
-              </div>
-          </footer>
-      </div>
+                <div class="text-slate-500 text-sm text-center md:text-right">
+                    <p>
+                        Entwickelt mit ❤️
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
 
-      <script>
-          // Initialize Icons
-          lucide.createIcons();
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
 
-          // Cuda Guide Toggle Logic
-          const btn = document.getElementById('cuda-toggle-btn');
-          const content = document.getElementById('cuda-content');
-          const btnText = document.getElementById('cuda-btn-text');
-          const btnIcon = document.getElementById('cuda-btn-icon');
+        // Cuda Guide Toggle Logic
+        const btn = document.getElementById('cuda-toggle-btn');
+        const content = document.getElementById('cuda-content');
+        const btnText = document.getElementById('cuda-btn-text');
+        const btnIcon = document.getElementById('cuda-btn-icon');
 
-          btn.addEventListener('click', () => {
-              const isHidden = content.classList.contains('hidden');
-              if (isHidden) {
-                  content.classList.remove('hidden');
-                  btnText.textContent = 'Anleitung ausblenden';
-                  btnIcon.setAttribute('data-lucide', 'chevron-up');
-              } else {
-                  content.classList.add('hidden');
-                  btnText.textContent = 'Installationsanleitung anzeigen';
-                  btnIcon.setAttribute('data-lucide', 'chevron-down');
-              }
-              // Refresh icons to update chevron
-              lucide.createIcons();
-          });
-      </script>
-  </body>
-  </html>
+        btn.addEventListener('click', () => {
+            const isHidden = content.classList.contains('hidden');
+            if (isHidden) {
+                content.classList.remove('hidden');
+                btnText.textContent = 'Anleitung ausblenden';
+                btnIcon.setAttribute('data-lucide', 'chevron-up');
+            } else {
+                content.classList.add('hidden');
+                btnText.textContent = 'Installationsanleitung anzeigen';
+                btnIcon.setAttribute('data-lucide', 'chevron-down');
+            }
+            // Refresh icons to update chevron
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>
